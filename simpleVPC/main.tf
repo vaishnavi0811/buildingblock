@@ -23,9 +23,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   instance_tenancy     = "default"
-  tags = {
-    Name = "sentinelTest"
-  }
+  
 }
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
