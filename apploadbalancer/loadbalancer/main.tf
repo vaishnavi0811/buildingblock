@@ -10,6 +10,7 @@ data "aws_vpc" "getVPC" {
 }
 data "aws_subnet" "getSubnet" {
   vpc_id = data.aws_vpc.getVPC.id
+  availability_zone = "us-east-1b"
 }
 
 resource "aws_lb" "MyAWSResource" {
