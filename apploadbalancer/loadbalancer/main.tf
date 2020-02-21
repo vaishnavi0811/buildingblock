@@ -5,7 +5,7 @@ variable "certARN" {
 data "aws_vpc" "getVPC" {
   filter {
     name   = "tag:Name"
-    values = ["testvpctoimport"]
+    values = ["VPC501"]
   }
 }
 data "aws_subnet" "getSubnet" {
