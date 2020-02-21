@@ -28,7 +28,7 @@ resource "tls_self_signed_cert" "this_cert" {
   ]
 }
 resource "aws_acm_certificate" "the_cert" {
-  private_key      = tls_private_key.this_cert.private_key_pem
+  private_key      = tls_self_signed_cert.this_cert.private_key_pem
   certificate_body = tls_self_signed_cert.this_cert.cert_pem
 }
 output "certARN" {

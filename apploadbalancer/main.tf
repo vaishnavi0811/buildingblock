@@ -29,5 +29,5 @@ module "cert" {
 }
 module "aag" {
   source = "./loadbalancer"
-  certARN = module.cer.certARN
+  certARN = module.cert.certARN
 }
