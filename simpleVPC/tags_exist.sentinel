@@ -1,0 +1,43 @@
+validate_attribute_contains_list = func(type, attribute) {
+
+  validated = true
+
+
+  # Loop through the resource instances
+  for resource_instances as address, r {
+    if r.destroy and not r.requires_new {
+      print("Skipping resource", address, "that is being destroyed.")
+      continue
+    }
+
+    if (r.diff[attribute + ".%"].computed else false) or
+       (r.diff[attribute + ".#"].computed else false) {
+      print("Resource", address, "has attribute", attribute,
+            "that is computed.")
+
+    } else {
+
+      if r.applied[attribute] else null is not null  {
+
+        validated = true
+
+      } else {
+        print("Resource", address, "is missing attribute", attribute)
+        validated = false
+      } // end check that attribute is list or map
+
+    } // end computed check
+  } // end resource instances
+
+  return validated
+}
+
+### Rules ###
+
+# Call the validation function
+tags_validated = validate_attribute_contains_list("aws_vpc","tags")
+
+#Main rule
+main = rule {
+  tags_validated
+}
